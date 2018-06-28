@@ -13,7 +13,7 @@ public class Trabalho1Exercicio4Collection implements IContador{
 
     @Override
     public String contar(String frase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
     
 }
