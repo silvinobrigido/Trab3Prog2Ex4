@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
  *
  * @author User
  */
-public class Trabalho1Exercicio4HashMap implements IContador{
+public class ContadorMap implements IContador{
 
     /**
      * @param args the command line arguments
