@@ -23,31 +23,9 @@ public class ContadorMap implements IContador{
     //Esta usa HashMap está Ok.
     
     public static void main(String[] args) {       
-        System.out.println(new Trabalho1Exercicio4HashMap().contar("Eu estou escrevendo um programa, mas eu não tenho um programa para escrever"));
+        System.out.println(new ContadorMap().contar("Eu estou escrevendo um programa, mas eu não tenho um programa para escrever"));
     }
     
-    public static void qtdadeVezesHashMap(String str){
-        HashMap mapa = new HashMap < String, Integer >(); 
-        StringTokenizer st = new StringTokenizer(str);
-        while(st.hasMoreTokens()){
-             String palavra = st.nextToken();
-             palavra = palavra.replace(',', ' ');
-             palavra = palavra.trim();
-             palavra = palavra.toLowerCase(Locale.getDefault());
-            if (mapa.containsKey(palavra)){
-              int contador = (int) mapa.get(palavra); // Obtem contagem atual
-              mapa.put( palavra, contador+1); // Incrementa a contagem
-            } else{
-              mapa.put( palavra, 1);  
-            }
-        }
-        Set<String> chaves = mapa.keySet();
-        for(String a :chaves){
-            if(a != null)
-				System.out.println("A palavra '" + a +"' foi apresentada "+ mapa.get(a) + " vezes na frase");
-		}        
-        }      
-
     @Override
     public String contar(String frase) { //ok 
         HashMap mapa = new HashMap < String, Integer >(); 
@@ -68,13 +46,12 @@ public class ContadorMap implements IContador{
         Set<String> chaves = mapa.keySet();
         for(String a :chaves){
             if(a != null){
-		 System.out.println(a + mapa.get(a));
                   valor+= a +"-"+ mapa.get(a)+";";
             }
 		}
         return valor+"]";
     }    
-    }
+}
 
     
 
