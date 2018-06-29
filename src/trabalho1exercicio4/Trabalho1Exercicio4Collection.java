@@ -9,7 +9,7 @@ package trabalho1exercicio4;
  *
  * @author Leorcon
  */
-public class Trabalho1Exercicio4Collection implements IContador{
+public class ContadorCollection implements IContador{
 
     @Override
     public String contar(String frase) {
