@@ -24,11 +24,12 @@ public class ContadorMap implements IContador {
     /**
      * @param args the command line arguments
      */
-    //Criar outra classe que use a collection; 
-    //Esta usa HashMap está Ok.
+    
+    //Esta usa HashMap está faltando apenas ajuste da ordem alfabética.
     public static void main(String[] args) {
+        System.out.println("Map");
         System.out.println(new ContadorMap().contar("Eu estou escrevendo um programa, mas eu não tenho um programa para escrever"));
-        System.out.println("ArrayList");
+        System.out.println("Collection");
         System.out.println(new ContadorCollection().contar("Eu estou escrevendo um programa, mas eu não tenho um programa para escrever"));
     }
 
