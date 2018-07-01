@@ -5,16 +5,13 @@
  */
 package trabalho1exercicio4;
 
+
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
-
 /**
  *
  * @author User
@@ -24,8 +21,7 @@ public class ContadorMap implements IContador {
     /**
      * @param args the command line arguments
      */
-    
-    //Esta usa HashMap está faltando apenas ajuste da ordem alfabética.
+    //Esta usa LinkedHashMap está faltando apenas ajuste da ordem alfabética.
     public static void main(String[] args) {
         System.out.println("Map");
         System.out.println(new ContadorMap().contar("Eu estou escrevendo um programa, mas eu não tenho um programa para escrever"));
@@ -35,7 +31,7 @@ public class ContadorMap implements IContador {
 
     @Override
     public String contar(String frase) { //ok 
-        HashMap mapa = new HashMap< String, Integer>();
+        LinkedHashMap mapa = new LinkedHashMap< String, Integer>();
         StringTokenizer st = new StringTokenizer(frase);
         while (st.hasMoreTokens()) {
             String palavra = st.nextToken();
@@ -48,20 +44,27 @@ public class ContadorMap implements IContador {
             } else {
                 mapa.put(palavra, 1);
             }
-        }        
+        }
+        Map<String, Integer> treeMap = new TreeMap<String, Integer>(
+                new Comparator<String>() {
+                    @Override
+                    public int compare(String o1, String o2) {
+                        return o1.compareTo(o2);
+                    }
+                });
+        treeMap.putAll(mapa);
         int contador = 0;
-        String valor = "[";
-        Set<String> chaves = mapa.keySet();
-        for (String a : chaves) {
+        String valor = "[";        
+        for (String a : treeMap.keySet()) {
             if (a != null) {
-                if (contador == chaves.size() - 1) {
-                    valor += a + "-" + mapa.get(a);
+                if (contador == treeMap.size() - 1) {
+                    valor += a + "-" + treeMap.get(a);
                 } else {
-                    valor += a + "-" + mapa.get(a) + ";";
+                    valor += a + "-" + treeMap.get(a) + ";";
                     contador++;
                 }
             }
-        }
+        }     
         return valor + "]";
     }
 }
