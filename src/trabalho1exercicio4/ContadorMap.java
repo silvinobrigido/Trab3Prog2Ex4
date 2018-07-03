@@ -32,6 +32,13 @@ public class ContadorMap implements IContador {
     @Override
     public String contar(String frase) { //ok 
         LinkedHashMap mapa = new LinkedHashMap< String, Integer>();
+        frase = frase.toLowerCase();
+        frase = frase.replaceAll(",", " ");
+        frase = frase.replaceAll("[.]", " ");
+        frase = frase.replaceAll(" - ", " ");      
+        frase = frase.replaceAll("!", " "); 
+        frase = frase.replaceAll("[?]", " ");                 
+        frase = frase.replaceAll(";", " ");
         StringTokenizer st = new StringTokenizer(frase);
         while (st.hasMoreTokens()) {
             String palavra = st.nextToken();
@@ -60,7 +67,7 @@ public class ContadorMap implements IContador {
                 if (contador == treeMap.size() - 1) {
                     valor += a + "-" + treeMap.get(a);
                 } else {
-                    valor += a + "-" + treeMap.get(a) + ";";
+                    valor += a + "-" + treeMap.get(a) + "; ";
                     contador++;
                 }
             }
