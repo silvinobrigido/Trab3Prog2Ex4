@@ -21,45 +21,53 @@ import java.util.StringTokenizer;
 public class ContadorCollection implements IContador {
 
     @Override
-    public String contar(String frase) {        
-        LinkedList<String> linked = new LinkedList<String>();
+    public String contar(String frase) {
+        LinkedList<String> linked = new LinkedList<>();
+        frase = frase.toLowerCase();
+        frase = frase.replaceAll(",", " ");
+        frase = frase.replaceAll("[.]", " ");
+        frase = frase.replaceAll(" - ", " ");
+        frase = frase.replaceAll("!", " ");
+        frase = frase.replaceAll("[?]", " ");
+        frase = frase.replaceAll(";", " ");
         StringTokenizer st = new StringTokenizer(frase);
+        int linkedPosicao[] = new int[st.countTokens()];
+        int posicao = 0;
         while (st.hasMoreTokens()) {
             String palavra = st.nextToken();
-            palavra = palavra.replace(',', ' ');
             palavra = palavra.trim();
-            palavra = palavra.toLowerCase(Locale.getDefault());
-            boolean contem = false;
             int index = 0;
-            
-            for(int i = 0; i < linked.size(); i++){
-                String[] a = linked.get(i).split("-");
-                if(a[0] == palavra){
-                    contem = true;
+
+            for (int i = 0; i < linked.size(); i++) {
+                if (linked.get(i).equals(palavra)) {
                     index = i;
-                    break;
                 }
             }
-            
-            if (contem) {
-                String[] a = linked.get(index).split("-");// Obtem contagem atual
-                int contador = Integer.parseInt(a[1]) + 1;
-                linked.remove(palavra);
-                linked.add(palavra + "-" + contador); // Incrementa a contagem*/
+
+            if (linked.contains(palavra)) {
+                linkedPosicao[index]++;
             } else {
-                linked.add(palavra + "-1");
+                linked.add(palavra);
+                linkedPosicao[posicao] = 1;
+                posicao++;
             }
         }
         Collections.sort(linked);
         String valor = "[";
-        int contador =0;
-        for (Object o : linked) {
-            if (linked.size() -1 == contador) {
+        int contador = 0;
+        for (String o : linked) {
+            if (contador == linked.size() -1) {
+                valor += o + "-" + linkedPosicao[contador];
+            } else {
+                valor += o + "-" + linkedPosicao[contador] + "; ";
+                contador++;
+            }
+            /*if (linked.size() -1 == contador) {
                 valor += o;
             } else {
                 valor += o + ";";
                 contador++;
-            }
+            }*/
         }
         return valor + "]";
     }
