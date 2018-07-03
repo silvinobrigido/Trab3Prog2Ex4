@@ -8,6 +8,7 @@ package trabalho1exercicio4;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Set;
@@ -28,12 +29,23 @@ public class ContadorCollection implements IContador {
             palavra = palavra.replace(',', ' ');
             palavra = palavra.trim();
             palavra = palavra.toLowerCase(Locale.getDefault());
-
-            if (linked.contains(palavra)) {
-                String[] a = linked.get(linked.indexOf(palavra)).split("-");// Obtem contagem atual
+            boolean contem = false;
+            int index = 0;
+            
+            for(int i = 0; i < linked.size(); i++){
+                String[] a = linked.get(i).split("-");
+                if(a[0] == palavra){
+                    contem = true;
+                    index = i;
+                    break;
+                }
+            }
+            
+            if (contem) {
+                String[] a = linked.get(index).split("-");// Obtem contagem atual
                 int contador = Integer.parseInt(a[1]) + 1;
-                /*mapa.put( palavra, contador+1); // Incrementa a contagem*/
-                linked.add(palavra + "-" + contador);
+                linked.remove(palavra);
+                linked.add(palavra + "-" + contador); // Incrementa a contagem*/
             } else {
                 linked.add(palavra + "-1");
             }
